@@ -1,0 +1,9 @@
+db-data/**
+odoo-data/**
+!odoo-data/odoo.conf
+!odoo-data/custom-addons
+!odoo-data/custom-addons/README.md
+!odoo-data/Odoo/
+!odoo-data/Odoo/README.md
+NOTES.txt
+docker/entrypoint.py

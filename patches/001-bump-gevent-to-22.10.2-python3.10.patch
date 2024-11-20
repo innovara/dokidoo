@@ -1,0 +1,11 @@
+--- a/requirements.txt	2024-11-14 18:08:34.856666896 +0000
++++ b/requirements.txt	2024-11-14 18:19:15.732529114 +0000
+@@ -10,7 +10,7 @@
+ gevent==1.4.0 ; sys_platform == 'win32' and python_version < '3.7'
+ gevent==1.5.0 ; python_version == '3.7'
+ gevent==20.9.0 ; python_version > '3.7' and python_version <= '3.9'
+-gevent==21.8.0 ; python_version > '3.9'  # (Jammy)
++gevent==22.10.2 ; python_version > '3.9'
+ greenlet==0.4.10 ; python_version < '3.7'
+ greenlet==0.4.15 ; python_version == '3.7'
+ greenlet==0.4.17 ; python_version > '3.7' and python_version <= '3.9'

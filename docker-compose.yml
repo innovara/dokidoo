@@ -1,0 +1,32 @@
+services:
+  db:
+    container_name: odoo-db
+    image: postgres:14
+    restart: unless-stopped
+    env_file:
+      - ./env/postgresql.env
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+      - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  odoo:
+    container_name: odoo
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ODOO_VERSION=14.0
+    restart: unless-stopped
+    volumes:
+      - ./odoo-data/odoo.conf:/opt/dokidoo/odoo.conf
+      - ./odoo-data/custom-addons:/opt/dokidoo/odoo/custom-addons
+      - ./odoo-data/Odoo:/opt/dokidoo/.local/share/Odoo
+    ports:
+      - 8069:8069
+      - 8072:8072
+    # Or if behind a proxy on the same host
+    #  - "127.0.0.1:8069:8069"
+    #  - "127.0.0.1:8072:8072"
+    #  - "[::1]:8069:8069"
+    #  - "[::1]:8072:8072"
