@@ -19,6 +19,8 @@ fi
 
 BRANCH=$1
 
+mkdir -p odoo-data/custom-addons
+
 git clone https://github.com/OCA/account-reconcile.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-reconcile
 git clone https://github.com/OCA/bank-statement-import.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/bank-statement-import
 git clone https://github.com/OCA/OpenUpgrade.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/OpenUpgrade
