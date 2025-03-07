@@ -53,6 +53,7 @@ RUN apt update && \
         python3-pyparsing \
         python3-pypdf2 \
         python3-qrcode \
+        python3-renderpm \
         python3-reportlab \
         python3-requests \
         python3-serial \
