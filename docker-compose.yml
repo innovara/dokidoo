@@ -1,7 +1,7 @@
 services:
   db:
     container_name: odoo-db
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     restart: unless-stopped
     env_file:
       - ./env/postgresql.env
@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
       network: host
       args:
-        - ODOO_VERSION=15.0
+        - ODOO_VERSION=16.0
     restart: unless-stopped
     volumes:
       - ./odoo-data/odoo.conf:/opt/dokidoo/odoo.conf
