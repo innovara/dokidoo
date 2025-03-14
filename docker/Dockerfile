@@ -32,6 +32,7 @@ RUN apt update && \
         python3-decorator \
         python3-docutils \
         python3-feedparser \
+        python3-geoip2 \
         python3-gevent \
         python3-greenlet \
         python3-html2text \
@@ -57,6 +58,7 @@ RUN apt update && \
         python3-renderpm \
         python3-reportlab \
         python3-requests \
+        python3-rjsmin \
         python3-serial \
         python3-stdnum \
         python3-tz \
