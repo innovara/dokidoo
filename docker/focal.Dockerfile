@@ -44,6 +44,7 @@ RUN apt update && \
         python3-mock \
         python3-num2words \
         python3-ofxparse \
+        python3-openssl \
         python3-passlib \
         python3-pillow \
         python3-polib \
