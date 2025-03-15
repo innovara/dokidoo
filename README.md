@@ -4,11 +4,11 @@
 
 **dokidoo** is a framework to deploy Odoo using Docker containers. It comprises mostly a collection of Docker files and some scripts to facilitate the process.
 
-While it is more suitable for temporary purposes e.g. testing and development, upgrades, demos, and so on, permanent deployments have been taken into account with the use of volumes for persisting data.
+While it is more suitable for temporary purposes e.g. development, testing, upgrades, demos, and so on, permanent deployments have been taken into account with the use of volumes for persisting data.
 
-For the backend db, `docker-compose.yml` pulls PostgreSQL's official image from Docker Hub (https://hub.docker.com/_/postgres). For Odoo's image, it builds it on the host running `docker compose`, cloning the latest version of Odoo from their git repository on GitHub (https://github.com/odoo/odoo).
+For the backend db, `docker-compose.yml` pulls PostgreSQL's official image from Docker Hub (https://hub.docker.com/_/postgres). For Odoo, it builds the image on the host running `docker compose`, cloning the latest version of Odoo from their git repository on GitHub (https://github.com/odoo/odoo).
 
-## How to use dokidoo
+## How to use **dokidoo**
 
 0. Install docker if you haven't done so yet: https://docs.docker.com/engine/install/
 
@@ -50,17 +50,17 @@ To initialize the db again, delete `./db-data`. Doing so of course deletes all t
 
 There are more chances of things not working as expected, or not working at all, if you make changes. However, if you want to adapt **dokidoo**, the starting point is `docker-compose.yml`. Currently `./Dockerfile` points to `./docker/Dockerfile`. There are other Docker build files under `./docker` which are not used, but you should take a look at them. Particularly `./docker/requirements.Dockerfile` which doesn't use pre-compiled packages for the python3 modules and it builds them with pip, using Odoo's `requirements.txt` file. Also `bookworm.Dockerfile` might be of interest if you prefer Debian. You can edit `docker-compose.yml` to point to these files, or leave it as it is and change the symbolic link to the build file that you want to try.
 
-## Use dokidoo for upgrades
+## Use **dokidoo** for upgrades
 
-Using `dokidoo` to upgrade Odoo between major versions has proved to be very efficient in my experience. Just please note that you will have to edit `docker-compose.yml` to keep PostgreSQL on the same version while you keep bumping Odoo. Once you are at the Odoo version that you want, it is also possible to upgrade PostgreSQL.
+Using **dokidoo** to upgrade Odoo between major versions has proved to be very efficient in my experience. Just please note that you will have to edit `docker-compose.yml` to keep PostgreSQL on the same version while you keep bumping Odoo. Once you are at the Odoo version that you want, it is also possible to upgrade PostgreSQL.
 
 If you want to do something like this but need help, please see the Support section.
 
 ## Feedback
 
-First please read the Support section.
+First, please read the Support section.
 
-I initially focused on Odoo 14.0, a relatively old version, because that is what I was using at the time. As I worked my way through upgrading my instance to 17.0, I created the other branches with the small changes needed for it to work. Feedback is especially welcomed on 15.0 and 16.0 which I didn't use for a meaningful amount of time (just for the upgrade) and 18.0 which is tested to the point I can create a db and log in.
+I initially focused on Odoo 14.0, a relatively old version, because that is what I was using at the time. As I worked my way through upgrading my instance to 17.0, I created the other branches with the small changes needed for it to work. Feedback is especially welcomed on 15.0 and 16.0, which I didn't use for any meaningful amount of time, and 18.0, which is tested to the point I can create a db and log in.
 
 ## Support
 
@@ -70,6 +70,6 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-I am an IT consultant and I can provide services to help you with Odoo in your environment, using **dokidoo** or otherwise. There is also a healthy number of consultants out there who can do the same. And if you are on a tight budget, or you don't want to spend money on a particular issue you might have, there are other projects and community forums where you can ask for help. The bottom line is that this is not a vocational project to which I am going to devote hours to help getting it all working. I want to share the output of a non-trivial amount of time dedicated to the project so others can use it and build on that, like I have done countless times with other's work.
+I am an IT consultant and I can provide services to help you with Odoo in your environment, using **dokidoo** or otherwise. There is also a healthy number of consultants out there who can do the same. And if you are on a tight budget, or you don't want to spend money on a particular issue affecting you, there are other projects and community forums where you can ask for help. The bottom line is that this is not a vocational project to which I am going to devote to support Odoo users. I want to share the output of a non-trivial amount of time dedicated to the project, so others can use it and build on that, like I have done countless times with someone else's work.
 
-Since **dokidoo** is mostly a collection of third-party tools, you are more likely to encounter problems with those and you should report them upstream. However, if you found something that doesn't work on certain situations, or it could be done better, please report it.
+Since **dokidoo** is mostly a collection of third-party tools, you are more likely to encounter problems with those and you should report them upstream. However, if you found something on **dokidoo** that doesn't work on certain situations, or it could be done better, please report it and I will be happy to look into it.
