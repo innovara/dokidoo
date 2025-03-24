@@ -31,6 +31,7 @@ git clone https://github.com/OCA/multi-company.git --depth 1 --branch $BRANCH --
 git clone https://github.com/OCA/OpenUpgrade.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/OpenUpgrade
 git clone https://github.com/OCA/project.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/project
 git clone https://github.com/OCA/reporting-engine.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/reporting-engine
+git clone https://github.com/OCA/server-ux.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/server-ux
 git clone https://github.com/OCA/timesheet.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/timesheet
 git clone https://github.com/OCA/web.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/web
 git clone https://github.com/odoomates/odooapps.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/odoomates
