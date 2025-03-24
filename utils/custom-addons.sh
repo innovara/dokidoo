@@ -21,8 +21,13 @@ BRANCH=$1
 
 mkdir -p odoo-data/custom-addons
 
+git clone https://github.com/OCA/account-analytic.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-analytic
+git clone https://github.com/OCA/account-financial-reporting.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-financial-reporting
+git clone https://github.com/OCA/account-invoicing.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-invoicing
 git clone https://github.com/OCA/account-reconcile.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-reconcile
+git clone https://github.com/OCA/bank-payment --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/bank-payment
 git clone https://github.com/OCA/bank-statement-import.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/bank-statement-import
+git clone https://github.com/OCA/multi-company.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/multi-company
 git clone https://github.com/OCA/OpenUpgrade.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/OpenUpgrade
 git clone https://github.com/OCA/project.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/project
 git clone https://github.com/OCA/reporting-engine.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/reporting-engine
