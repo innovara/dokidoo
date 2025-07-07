@@ -66,8 +66,10 @@ There is an increased risk of things not working as expected, or failing entirel
 
 Currently, `./Dockerfile` is a symbolic link to `./docker/Dockerfile`. There are additional Docker build files under `./docker`, which are not used by default, but may be of interest. In particular:
 
-- `./docker/requirements.Dockerfile` – builds Python 3 modules using pip and Odoo's `requirements.txt`, rather than using precompiled packages.
-- `bookworm.Dockerfile` – based on Debian, for those who prefer it.
+- `requirements.Dockerfile` – builds Python 3 modules using pip and Odoo's `requirements.txt`, rather than using precompiled packages.
+- `bookworm.Dockerfile` – based on Debian 12 (Bookworm).
+- `focal.Dockerfile` – based on Ubuntu 20.04 (Focal).
+- `jammy.Dockerfile` – based on Ubuntu 22.04 (Jammy).
 
 You can either modify `docker-compose.yml` to point to one of these files, or change the symbolic link to use the desired build file.
 
@@ -101,5 +103,6 @@ If you are on a tight budget or do not wish to spend money on a particular issue
 
 Please note that this is not a vocational project to which I will dedicate hours of support. I am sharing the result of a considerable amount of work so that others may benefit and build upon it, just as I have benefited from others' work.
 
-Since **dokidoo** is primarily a collection of third-party tools, problems are more likely to originate from those tools. You should report such issues upstream.  
+Since **dokidoo** is primarily a collection of third-party tools, problems are more likely to originate from those tools. You should report such issues upstream.
+
 However, if you discover something in **dokidoo** that does not work in specific situations or could be improved, please report it and I will be happy to look into it.
