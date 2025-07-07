@@ -2,74 +2,104 @@
 
 ## Introduction
 
-**dokidoo** is a framework to deploy Odoo using Docker containers. It comprises mostly a collection of Docker files and some scripts to facilitate the process.
+**dokidoo** is a framework for deploying Odoo using Docker containers. It consists primarily of a collection of Dockerfiles and some scripts to facilitate the process.
 
-While it is more suitable for temporary purposes e.g. development, testing, upgrades, demos, and so on, permanent deployments have been taken into account with the use of volumes for persisting data.
+While it is more suitable for temporary purposes (e.g. development, testing, upgrades, demos, and so on), permanent deployments have been considered, with the use of volumes for data persistence.
 
-For the backend db, `docker-compose.yml` pulls PostgreSQL's official image from Docker Hub (https://hub.docker.com/_/postgres). For Odoo, it builds the image on the host running `docker compose`, cloning the latest version of Odoo from their git repository on GitHub (https://github.com/odoo/odoo).
+For the backend database, `docker-compose.yml` pulls PostgreSQL's official image from Docker Hub (https://hub.docker.com/_/postgres). For Odoo, it builds the image on the host running `docker compose`, cloning the latest version of Odoo from their GitHub repository (https://github.com/odoo/odoo).
 
 ## How to use **dokidoo**
 
-0. Install docker if you haven't done so yet: https://docs.docker.com/engine/install/
+0. Install Docker if you have not done so already: https://docs.docker.com/engine/install/
 
-1. Clone this repository.
+1. Clone this repository:
 
-`git clone https://github.com/innovara/dokidoo --depth 1 --branch <ODOO_VERSION> --single-branch && cd dokidoo`
+```bash
+git clone https://github.com/innovara/dokidoo --depth 1 --branch <ODOO_VERSION> --single-branch && cd dokidoo
+```
 
-2. Set up your credentials.
+2. Set up your credentials:
 
-`nano env/postgresql.env`
+```bash
+nano env/postgresql.env
+```
 
-Edit `POSTGRES_PASSWORD` and `PGPASSWORD`. The former is postgres', the super user, password. The later is Odoo's db user password. If you want to use a db user for Odoo that is not odoo, edit `PGUSER` too.
+Edit `POSTGRES_PASSWORD` and `PGPASSWORD`. The former is the password for `postgres`, the superuser. The latter is the password for Odoo's database user. If you wish to use a database user other than `odoo`, edit `PGUSER` as well.
 
-`nano odoo-data/odoo.conf`
+```bash
+nano odoo-data/odoo.conf
+```
 
-Edit `db_password = <db_user password>` with the password used on `PGPASSWORD`. If you changed `PGUSER`, you have to also change `db_user = odoo` here.
+Set `db_password = <db_user password>` to match the value of `PGPASSWORD`. If you changed `PGUSER`, you will also need to update `db_user = odoo`.
 
-3. Optional. Depending on what you are deploying, you might want to add custom addons to `odoo-data/custom-addons` now. Also take a look at `./utils/custom-addons.sh`.
-Please note that Odoo doesn't load addons recursively. It will ignore addons in subfolders under `odoo-data/custom-addons`. You need to add each path to folders containing addons to `addons_path` in `odoo-data/odoo.conf`.
+3. *(Optional)* Depending on what you are deploying, you may want to add custom addons to `odoo-data/custom-addons` at this point. Also, take a look at `./utils/custom-addons.sh`.  
+**Note**: Odoo does not load addons recursively. It will ignore addons located in subfolders under `odoo-data/custom-addons`. You need to explicitly add the paths to each folder containing addons in the `addons_path` entry in `odoo-data/odoo.conf`.
 
-4. Fix permissions. You will need to be root or use sudo.
+4. Fix permissions (you will need root access or `sudo`):
 
-`./utils/fix-permissions.sh`
+```bash
+./utils/fix-permissions.sh
+```
 
-5. Bring the containers up, staying attached first.
+5. Start the containers, remaining attached initially:
 
-`docker compose up`
+```bash
+docker compose up
+```
 
-postgres will initialize the db server and add Odoo's user. A new folder named `./db-data` will be created on the host for persisting data. PostgreSQL's image will not initilize the db server a second time, and it will simply use whatever it is in `./db-data`.
-To initialize the db again, delete `./db-data`. Doing so of course deletes all the data on the db server. 
+PostgreSQL will initialise the database server and create Odoo’s user. A new folder named `./db-data` will be created on the host for data persistence. PostgreSQL’s image will not reinitialise the server on subsequent runs; it will simply use the contents of `./db-data`.
 
-6. Go to `0.0.0.0:8069` on a browser, set up your admin password, create your Odoo db, install modules and so on. The URL will vary if you are using a headless server or a reverse proxy like nginx. Also, don't forget about your firewall if you are running this on another machine.
+To reinitialise the database, delete the `./db-data` folder. **Note:** this will delete all data on the database server.
 
-7. Once you've passed the initial stages of the setup, you can stop docker compose with Ctrl+c and bring it back up again, detached this time.
+6. Open `0.0.0.0:8069` in your browser, set your admin password, create your Odoo database, install modules, and so on.  
+The URL may differ if you are using a headless server or a reverse proxy such as nginx. Also, ensure your firewall is configured to allow access if running this on a separate machine.
 
-`docker compose up -d`
+7. Once you have completed the initial setup, you can stop Docker Compose with `Ctrl+C` and restart it in detached mode:
+
+```bash
+docker compose up -d
+```
 
 ## Modifications
 
-There are more chances of things not working as expected, or not working at all, if you make changes. However, if you want to adapt **dokidoo**, the starting point is `docker-compose.yml`. Currently `./Dockerfile` points to `./docker/Dockerfile`. There are other Docker build files under `./docker` which are not used, but you should take a look at them. Particularly `./docker/requirements.Dockerfile` which doesn't use pre-compiled packages for the python3 modules and it builds them with pip, using Odoo's `requirements.txt` file. Also `bookworm.Dockerfile` might be of interest if you prefer Debian. You can edit `docker-compose.yml` to point to these files, or leave it as it is and change the symbolic link to the build file that you want to try.
+There is an increased risk of things not working as expected, or failing entirely, if you make changes. However, if you want to adapt **dokidoo**, start with `docker-compose.yml`.
+
+Currently, `./Dockerfile` is a symbolic link to `./docker/Dockerfile`. There are additional Docker build files under `./docker`, which are not used by default, but may be of interest. In particular:
+
+- `./docker/requirements.Dockerfile` – builds Python 3 modules using pip and Odoo's `requirements.txt`, rather than using precompiled packages.
+- `bookworm.Dockerfile` – based on Debian, for those who prefer it.
+
+You can either modify `docker-compose.yml` to point to one of these files, or change the symbolic link to use the desired build file.
 
 ## Use **dokidoo** for upgrades
 
-Using **dokidoo** to upgrade Odoo between major versions has proved to be very efficient in my experience. Just please note that you will have to edit `docker-compose.yml` to keep PostgreSQL on the same version while you keep bumping Odoo. Once you are at the Odoo version that you want, it is also possible to upgrade PostgreSQL.
+Using **dokidoo** to upgrade Odoo between major versions has proved very efficient in my experience.  
+Please note that you will need to edit `docker-compose.yml` to keep PostgreSQL on the same version while upgrading Odoo. Once you reach your target Odoo version, you may also upgrade PostgreSQL.
 
-If you want to do something like this but need help, please see the Support section.
+If you would like to perform this kind of upgrade and need assistance, refer to the Support section below.
 
 ## Feedback
 
-First, please read the Support section.
+Please read the Support section before submitting feedback.
 
-I initially focused on Odoo 14.0, a relatively old version, because that is what I was using at the time. As I worked my way through upgrading my instance to 17.0, I created the other branches with the small changes needed for it to work. Feedback is especially welcomed on 15.0 and 16.0, which I didn't use for any meaningful amount of time, and 18.0, which is tested to the point I can create a db and log in.
+I initially focused on Odoo 14.0, which was the version I was using at the time. As I upgraded my instance to 17.0, I created other branches with the minor changes needed for them to work.
+
+Feedback is especially welcome regarding versions 15.0 and 16.0, which I did not use extensively, and 18.0, which has been tested only to the extent that I could create a database and log in.
 
 ## Support
 
-As the GPL-3.0 license goes:
+As per the GPL-3.0 licence:
+
 ```
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
-I am an IT consultant and I can provide services to help you with Odoo in your environment, using **dokidoo** or otherwise. There is also a healthy number of consultants out there who can do the same. And if you are on a tight budget, or you don't want to spend money on a particular issue affecting you, there are other projects and community forums where you can ask for help. The bottom line is that this is not a vocational project to which I am going to devote hours to support Odoo users. I want to share the output of a non-trivial amount of time dedicated to the project, so others can use it and build on that, like I have done countless times with someone else's work.
 
-Since **dokidoo** is mostly a collection of third-party tools, you are more likely to encounter problems with those and you should report them upstream. However, if you found something on **dokidoo** that doesn't work on certain situations, or it could be done better, please report it and I will be happy to look into it.
+I am an IT consultant and can provide services to help you with Odoo in your environment, whether using **dokidoo** or not. There are also many other consultants who can do the same.  
+If you are on a tight budget or do not wish to spend money on a particular issue, there are other projects and community forums where you can ask for help.
+
+Please note that this is not a vocational project to which I will dedicate hours of support. I am sharing the result of a considerable amount of work so that others may benefit and build upon it, just as I have benefited from others' work.
+
+Since **dokidoo** is primarily a collection of third-party tools, problems are more likely to originate from those tools. You should report such issues upstream.  
+However, if you discover something in **dokidoo** that does not work in specific situations or could be improved, please report it and I will be happy to look into it.
