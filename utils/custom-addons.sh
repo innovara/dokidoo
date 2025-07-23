@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2024,  Manuel Fombuena <fombuena@outlook.com>
+# Copyright (C) 2024,  Manuel Fombuena <mfombuena@innovara.tech>
 #
 # Custom list of addons for easy deployment
 #
