@@ -36,4 +36,4 @@ git clone https://github.com/OCA/timesheet.git --depth 1 --branch $BRANCH --sing
 git clone https://github.com/OCA/web.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/web
 git clone https://github.com/odoomates/odooapps.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/odoomates
 
-echo "You possibly want to run ./utils/fix-permissions.sh now"
+echo "\nYou most likely want to run ./utils/fix-permissions.sh now"
