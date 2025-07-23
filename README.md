@@ -51,10 +51,24 @@ PostgreSQL will initialise the database server and create Odoo’s user. A new f
 
 To reinitialise the database, delete the `./db-data` folder. **Note:** this will delete all data on the database server.
 
-6. Open `0.0.0.0:8069` in your browser, set your admin password, create your Odoo database, install modules, and so on.  
+6. After you have confirmed that Odoo's container is awaiting connection, stop the containers with `Ctrl+C`.
+
+7. Fix permissions again (you will need root access or `sudo`):
+
+```bash
+./utils/fix-permissions.sh
+```
+
+8. Start the containers attached again:
+
+```bash
+docker compose up
+```
+
+9. Open `0.0.0.0:8069` in your browser, set your admin password, create your Odoo database, install modules, and so on.  
 The URL may differ if you are using a headless server or a reverse proxy such as nginx. Also, ensure your firewall is configured to allow access if running this on a separate machine.
 
-7. Once you have completed the initial setup, you can stop Docker Compose with `Ctrl+C` and restart it in detached mode:
+10. Once you have completed the initial setup, you can stop Docker Compose with `Ctrl+C` and restart it in detached mode:
 
 ```bash
 docker compose up -d
