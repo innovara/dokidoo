@@ -26,6 +26,7 @@ RUN apt update && \
         gsfonts \
         libfontenc1 \
         postgresql-client \
+        python3-asn1crypto \
         python3-babel \
         python3-cbor2 \
         python3-chardet \
