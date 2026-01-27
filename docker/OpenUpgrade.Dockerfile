@@ -27,6 +27,7 @@ RUN apt update && \
         libfontenc1 \
         postgresql-client \
         python3-babel \
+        python3-cbor2 \
         python3-chardet \
         python3-dateutil \
         python3-decorator \
