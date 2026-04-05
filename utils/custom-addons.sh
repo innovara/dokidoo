@@ -27,6 +27,7 @@ git clone https://github.com/OCA/account-invoicing.git --depth 1 --branch $BRANC
 git clone https://github.com/OCA/account-reconcile.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/account-reconcile
 git clone https://github.com/OCA/bank-payment --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/bank-payment
 git clone https://github.com/OCA/bank-statement-import.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/bank-statement-import
+git clone https://github.com/OCA/crm.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/crm
 git clone https://github.com/OCA/multi-company.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/multi-company
 git clone https://github.com/OCA/OpenUpgrade.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/OpenUpgrade
 git clone https://github.com/OCA/project.git --depth 1 --branch $BRANCH --single-branch odoo-data/custom-addons/project
